@@ -2,22 +2,23 @@ package com.codeup.spingblog.controller;
 
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 class HelloController {
 
     @GetMapping("/hello")
-    @ResponseBody
-    public String hello() {
-        return "<h1>Hello from Spring!</h1>";
+    public String hello(Model model) {
+        model.addAttribute("name", "World!");
+//        creates a default if no input
+        return "Hello";
     }
 
     @RequestMapping(path = "/hello/{name}", method = RequestMethod.GET)
-
-    @ResponseBody
-    public String helloToYou(@PathVariable String name) {
-        return String.format("Nice to meet you, %s!", name);
+    public String helloToYou(@PathVariable String name, Model model) {
+      model.addAttribute("name", name);
+      return "hello";
     }
 
     String fizzBuzzEvaluation(int num) {
