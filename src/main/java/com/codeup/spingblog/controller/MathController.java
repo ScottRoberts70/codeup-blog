@@ -1,39 +1,37 @@
 package com.codeup.spingblog.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
 public class MathController {
-    @GetMapping("/add/{a}/and/{b}")
+    @RequestMapping(path = "/add/{a}/and/{b}", method = RequestMethod.GET)
     @ResponseBody
     public String reportNumber(@PathVariable int a, @PathVariable int b) {
         var sum = a + b;
         return String.format("%s.", sum);
     }
 
-    @GetMapping("/subtract/{a}/from/{b}")
+    @RequestMapping(path = "/subtract/{a}/from/{b}", method = RequestMethod.GET)
     @ResponseBody
     public String subNumber(@PathVariable int a, @PathVariable int b) {
         var sub = a - b;
         return String.format("%s.", sub);
     }
 
-    @GetMapping("/multiply/{a}/and/{b}")
+    @RequestMapping(path = "/multiply/{a}/and/{b}", method = RequestMethod.GET)
     @ResponseBody
     public String multiplyNumber(@PathVariable int a, @PathVariable int b) {
         var multiply = a * b;
         return String.format("%s.", multiply);
     }
 
-    @GetMapping("/divide/{a}/by/{b}")
+    @RequestMapping(path = "/divide/{a}/by/{b}", method = RequestMethod.GET)
     @ResponseBody
     public String divNumber(@PathVariable int a, @PathVariable int b) {
-        var div = a / b;
-        return String.format("%s.", div);
+        return String.format("%d / %d = %d", a, b, a / b);
+//        a different way to do it
     }
 }
 

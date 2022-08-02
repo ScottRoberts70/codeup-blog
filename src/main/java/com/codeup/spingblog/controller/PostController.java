@@ -7,29 +7,26 @@ public class PostController {
 
     @RequestMapping(path = "/posts", method = RequestMethod.GET)
 
-    @ResponseBody
     public String thisPage() {
-        return ("posts index page");
+        return ("/posts/index");
     }
 
     @RequestMapping(path = "/posts/{id}", method = RequestMethod.GET)
 
-    @ResponseBody
+
     public String postsId(@PathVariable String id) {
-        return ("view an individual post");
+        return ("/posts/view");
     }
 
     @RequestMapping(path = "/posts/create", method = RequestMethod.GET)
 
-    @ResponseBody
     public String postsCreate() {
-        return ("view the form for creating a post");
+        return ("/posts/create");
     }
 
     @RequestMapping(path = "/posts/create", method = RequestMethod.POST)
 
-    @ResponseBody
     public String createPost() {
-        return ("create a new post");
+        return null;
     }
 }
