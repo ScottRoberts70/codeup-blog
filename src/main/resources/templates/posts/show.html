@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/head :: head">
+    <meta charset="UTF-8">
+    <title>Single Post</title>
+</head>
+<body>
+<div th:replace="partials/nav :: nav" ></div>
+<div class="soloAd">
+    <div class="soloAd-screen">
+        <div class="app-title" style="background-color: #80A6BE; color: white">
+            <h1>Here is the selected post!</h1>
+        </div>
+<h1 th:text="${post.title}"></h1>
+<h1 th:text="${post.body}"></h1>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/head :: head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="partials/nav :: nav"></div>
+<div class="grid">
+        <div th:each="post : ${posts}">
+            <div class=main-info>
+                <div class="grid-area-2">
+                    <div class="card-body">
+                    <h1 th:text="${post.title}"></h1>
+                <p th:text="${post.body}"></p>
+                <a th:href="${post.href}">See Post</a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
