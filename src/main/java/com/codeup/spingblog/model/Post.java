@@ -1,18 +1,23 @@
 
-package com.codeup.spingblog.controller;
+package com.codeup.spingblog.model;
+
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "post")
 
 public class Post {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(length = 100, nullable = false)
     private String title;
+    @Column(nullable = false)
     private String body;
 
-    private String href;
 
-    public Post(long id, String title, String body, String href) {
-        this.id = id;
-        this.title = title;
-        this.body = body;
-        this.href = href;
+    public Post() {
     }
 
     public Post(long id, String title, String body) {
@@ -24,14 +29,6 @@ public class Post {
     public Post(String title, String body) {
         this.title = title;
         this.body = body;
-    }
-
-    public String getHref() {
-        return href;
-    }
-
-    public void setHref(String href) {
-        this.href = href;
     }
 
     public long getId() {

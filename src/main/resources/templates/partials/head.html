@@ -3,10 +3,138 @@
 <head th:fragment="head">
   <meta charset="UTF-8" />
   <title>Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
   <style>
+
+
+    * {
+      box-sizing: border-box;
+    }
+
+
     body {
-      background-color: lightgray;
+      background-color: #777777;
+    }
+
+    .container-main {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      grid-auto-rows: minmax(100px, auto);
+    }
+
+    .container-main-create {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 15px;
+      grid-auto-rows: minmax(100px, auto);
+    }
+
+    .one {
+      background-color: lemonchiffon;
+      margin-top: 10px;
+      grid-row: span 1;
+      grid-column: span 1;
+      box-shadow: 0 0 2rem 0 rgba(0, 0, 0, .8);
+    }
+
+    .one-create {
+      margin-top: 10px;
+      grid-row: span 1;
+      width: 100px;
+    }
+
+    .two {
+      color: #FFFFFF;
+      border-top: #444444 3px solid;
+      grid-column: span 2;
+      grid-row: span 8;
+      box-shadow: 0 0 2rem 0 rgba(0, 0, 0, .8);
+      border-radius: 5px;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .create-form {
+      margin: 10px;
+      font-size: 22px;
+    }
+
+    .two-create {
+      align-items: center;
+      border-top: #444444 3px solid;
+      grid-column: span 4;
+      grid-row: span 8;
+      box-shadow: 0 0 2rem 0 rgba(0, 0, 0, .8);
+      border-radius: 5px;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .three {
+      display: grid;
+      grid-gap: 10px;
+      background-color: #FFFFFF;
+      grid-column: span 1;
+      grid-row: span 7;
+      box-shadow: 0 0 2rem 0 rgba(0, 0, 0, .8);
+    }
+
+    .three-create {
+      grid-gap: 10px;
+      width: 100px;
+      grid-row: span 1;
+    }
+
+    .item1 {
+      border: white 2px solid;
+      background-color: black;
+      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+      position: relative;
+      top: -60px;
+      float: left;
+      box-shadow: 0 0 2rem 0 rgba(0, 0, 0, .8);
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .column {
+      padding: 16px;
+      height: 100%;
+      margin: 5px;
+      background-color: #cccccc;
+    }
+
+    .container {
+      width: 350px;
+      height: 18rem;
+      box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .8);
+      border-radius: 5px;
+      position: relative;
+      z-index: 1;
+      background: inherit;
+      overflow: hidden;
+    }
+
+    .container:before {
+      content: "";
+      position: absolute;
+      background-color: lemonchiffon;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      box-shadow: inset 0 0 2000px rgba(255, 255, 255, .5);
+      filter: blur(10px);
+      /*margin: -20px;*/
     }
 
     .main-info {
@@ -39,27 +167,40 @@
 
     .grid {
       display: grid;
-      gap: 2rem;
+      gap: 1rem;
       margin-top: 10px;
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+
+    .grid1 {
+      font-size: 20px;
+      align-items: center;
+      justify-items: center;
+      display: grid;
+      gap: 2rem;
+      margin-top: 50px;
+      grid-template-columns: repeat(1, 1fr);
+      grid-auto-rows: 400px;
     }
 
     .grid-area-2{
-      display: grid;
-      grid-column: span 6;
-      grid-auto-rows: 250px;
+      /*display: grid;*/
+      /*grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));*/
+      /*grid-column: span 5;*/
+      /*grid-auto-rows: 300px;*/
     }
 
-    .card-body{
-      animation: cardEntrance 700ms ease-out;
-      animation-fill-mode: backwards;
-      text-align: center;
-      border: #ECF0F1 solid 2px;
-      background-color: white;
-      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-      font-family: Arial, sans-serif;
-      font-size: 18px;
-    }
+    /*.card-body{*/
+    /*  animation: cardEntrance 700ms ease-out;*/
+    /*  animation-fill-mode: backwards;*/
+    /*  text-align: center;*/
+    /*  border: #ECF0F1 solid 2px;*/
+    /*  background-color:  lemonchiffon;*/
+    /*  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;*/
+    /*  font-family: Arial, sans-serif;*/
+    /*  font-size: 18px;*/
+    /*}*/
+
   </style>
 </head>
 <body >

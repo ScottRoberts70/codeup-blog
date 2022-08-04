@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/head :: head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body id="create">
+<div th:replace="partials/nav :: nav"></div>
+<div class="container-main-create" >
+    <div class="one-create">
+    </div>
+    <div class="two-create" style="background-color: lemonchiffon">
+    <form action="/posts/create" method="post" class="create-form">
+        <label for="title">Post Title:</label><br>
+        <input type="text" id="title" name="title" placeholder="Post Title"><br>
+        <label for="body">Description:</label><br>
+        <textarea id="body" class="text" cols="86" rows ="10" name="body"></textarea><br>
+        <input type="submit" value="Submit" style="align-items: center">
+    </form>
+    </div>
+    <div class="three-create">
+
+    </div>
+</div>
+</body>
+</html>

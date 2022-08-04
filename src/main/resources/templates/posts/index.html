@@ -7,17 +7,21 @@
 <body>
 <div th:replace="partials/nav :: nav"></div>
 <div class="grid">
-        <div th:each="post : ${posts}">
+    <div th:each="post : ${posts}">
+        <div class="container">
             <div class=main-info>
                 <div class="grid-area-2">
-                    <div class="card-body">
-                    <h1 th:text="${post.title}"></h1>
-                <p th:text="${post.body}"></p>
-                <a th:href="${post.href}">See Post</a>
+                    <div style="max-width: 100%" >
+                        <h1 th:text="${post.title}" style="font-family: 'Dancing Script', cursive; "></h1>
+                        <p th:text="${post.body}"></p>
+                        <form action="/posts" method="post">
+                            <button name="show" type="submit" th:value="${post.id}">See Ad</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 </body>
 </html>

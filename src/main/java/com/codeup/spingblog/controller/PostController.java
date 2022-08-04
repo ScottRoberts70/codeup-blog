@@ -1,35 +1,92 @@
 package com.codeup.spingblog.controller;
 
+import com.codeup.spingblog.model.Post;
+import com.codeup.spingblog.repositories.PostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class PostController {
 
+   private PostRepository postsDao;
+
+    public PostController(PostRepository postsDao) {
+        this.postsDao = postsDao;
+    }
+
     @GetMapping("/posts")
     public String postsPage(Model model){
-        List<Post> posts = new ArrayList<>();
-        posts.add(new Post(1L, "Post 1", "Hi this is my post!", "/posts/1"));
-        posts.add(new Post(2L, "Post 2", "Their are many like it!", "/posts/2"));
-        posts.add(new Post(3L, "Post 3", "..But this one is mine!", "/posts/3"));
-        model.addAttribute("posts", posts);
+        model.addAttribute("posts", postsDao.findAll());
+
         return "/posts/index";
     }
 
-    @GetMapping("/posts/{id}")
-    public String postByIdPage(@PathVariable long id, Model model){
-        List<Post> posts = new ArrayList<>();
-        posts.add(new Post(1L, "Post1", "Post 1"));
-        posts.add(new Post(2L, "Post2", "Post 2"));
-        posts.add(new Post(3L, "Post3", "Post 3"));
+        @GetMapping("/posts/create")
+        public String createPost(){
+            return "/posts/create";
+        }
 
-        model.addAttribute("post", posts.get((int)id - 1));
 
+    @PostMapping("posts/create")
+    public String savePost(String title, String body){
+    if (title != null && body != null) {
+    postsDao.save(new Post(title, body));
+    }
+    return "redirect:/posts";
+    }
+
+
+
+    @GetMapping("/posts/show")
+    public String postByIdPage(){
         return "/posts/show";
     }
+    @PostMapping("/posts")
+    public String postMethods(Long delete, Long edit, Long show, HttpSession session, Model model){
+
+        if (show != null) {
+            Post post = postsDao.getById(show);
+            model.addAttribute("post", post);
+            return "/posts/show";
+        }
+
+        if (edit != null) {
+            session.setAttribute("edit", edit);
+            return "/posts/edit";
+        }
+
+        if (delete != null) {
+            Post post = postsDao.getById(delete);
+            postsDao.delete(post);
+        }
+        return "redirect:/posts";
+    }
+
+    @GetMapping("/post/edit")
+    public String editPostPage(){
+        return "/posts/edit";
+    }
+
+    @PostMapping("/posts/edit")
+    public String editPost( String title, String body, HttpSession session){
+        Long id = (Long) session.getAttribute("edit");
+        if (title != null && body != null) {
+            postsDao.editPost(title, body, id);
+        }
+        return "redirect:/posts";
+    }
+//    @PostMapping("/posts")
+//    public String singleAd (Long singleAd, Model model) {
+//        if (singleAd != null) {
+//            Post post = postsDao.getById(singleAd);
+//            model.addAttribute("post", post);
+//        }
+//        return "/posts/show";
+//    }
 }
 
