@@ -1,7 +1,9 @@
 package com.codeup.spingblog.controller;
 
 import com.codeup.spingblog.model.Post;
+import com.codeup.spingblog.model.User;
 import com.codeup.spingblog.repositories.PostRepository;
+import com.codeup.spingblog.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +17,11 @@ public class PostController {
 
    private PostRepository postsDao;
 
-    public PostController(PostRepository postsDao) {
+   private UserRepository usersDao;
+
+    public PostController(PostRepository postsDao, UserRepository usersDao) {
         this.postsDao = postsDao;
+        this.usersDao = usersDao;
     }
 
     @GetMapping("/posts")
@@ -35,12 +40,11 @@ public class PostController {
     @PostMapping("posts/create")
     public String savePost(String title, String body){
     if (title != null && body != null) {
-    postsDao.save(new Post(title, body));
+        User user = usersDao.getById(1L);
+    postsDao.save(new Post(title, body, user));
     }
     return "redirect:/posts";
     }
-
-
 
     @GetMapping("/posts/show")
     public String postByIdPage(){
