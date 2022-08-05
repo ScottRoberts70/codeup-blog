@@ -28,7 +28,7 @@
 
     .container-main-create {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(7, 1fr);
       gap: 15px;
       grid-auto-rows: minmax(100px, auto);
     }
@@ -42,9 +42,12 @@
     }
 
     .one-create {
+      display: grid;
       margin-top: 10px;
-      grid-row: span 1;
+      grid-column: span 2;
       width: 100px;
+
+
     }
 
     .two {
@@ -67,7 +70,7 @@
     .two-create {
       align-items: center;
       border-top: #444444 3px solid;
-      grid-column: span 4;
+      grid-column: span 3;
       grid-row: span 8;
       box-shadow: 0 0 2rem 0 rgba(0, 0, 0, .8);
       border-radius: 5px;
@@ -88,7 +91,7 @@
     .three-create {
       grid-gap: 10px;
       width: 100px;
-      grid-row: span 1;
+      grid-row: span 2;
     }
 
     .item1 {
@@ -184,24 +187,28 @@
       grid-auto-rows: 400px;
     }
 
-    .grid-area-2{
-      height: 100%;
-      /*display: grid;*/
-      /*grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));*/
-      /*grid-column: span 5;*/
-      /*grid-auto-rows: 300px;*/
+    #title {
+      width: 50%;
     }
 
-    /*.card-body{*/
-    /*  animation: cardEntrance 700ms ease-out;*/
-    /*  animation-fill-mode: backwards;*/
-    /*  text-align: center;*/
-    /*  border: #ECF0F1 solid 2px;*/
-    /*  background-color:  lemonchiffon;*/
-    /*  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;*/
-    /*  font-family: Arial, sans-serif;*/
-    /*  font-size: 18px;*/
-    /*}*/
+    .create-title{
+      font-family: 'Dancing Script', cursive;
+      text-align: center;
+      font-size: 80px;
+    }
+
+    .two-create{
+      margin-top: 60px;
+      height: 800px;
+      background-color: lemonchiffon;
+      text-align: center;
+
+    }
+
+
+    .grid-area-2{
+      height: 100%;
+    }
 
   </style>
 </head>
