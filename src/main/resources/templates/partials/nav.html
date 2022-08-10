@@ -20,9 +20,17 @@
                     <a class="nav-link" href="/posts">All Post</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="/posts/create">Create Post</a>
                 </li>
             </ul>
+            <div>
+                <form th:action="@{/logout}" th:method="post">
+                    <a class="btn-link btn" style="text-decoration:none;color: #444444" th:href="@{/login}">Logout</a>
+                </form>
+            </div>
         </div>
     </div>
 </nav>

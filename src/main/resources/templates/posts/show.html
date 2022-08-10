@@ -17,7 +17,11 @@
         </div>
         <div class="body-single" style="text-align: center">
             <h1 th:text="${post.user.email}"></h1>
-        </div>
+        </div><br>
+        <div class="tag-title" style="font-size: 24px; font-weight: bolder  "> Your selected tags:</div>
+        <ul class="tag-list" style="list-style: none; font-size: 22px">
+            <li th:each="tag: ${post.tags}" th:text="${tag.name}" />
+        </ul>
     </div>
 <!--    <div class="three-create"></div>-->
 </div>

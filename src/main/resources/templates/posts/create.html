@@ -11,11 +11,11 @@
     </div>
     <div class="two-create">
         <div class="create-title">Create a new post:</div>
-    <form action="/posts/create" method="post" class="create-form">
-        <label for="title">Post Title:</label><br>
-        <input type="text" id="title" name="title" placeholder="Post Title" width="150%"><br>
-        <label for="body">Description:</label><br>
-        <textarea id="body" class="text" cols="50" rows ="8" name="body"></textarea><br>
+    <form th:action="@{/posts/create}" th:method="post" th:object ="${post}">
+        Title:
+        <input th:field = "*{title}"/><br>
+       Description:
+        <input th:field= "*{body}" id="body" class="text" cols="50" rows ="8" name="body"/><br>
         <input type="submit" value="Submit" style="align-items: center">
     </form>
     </div>

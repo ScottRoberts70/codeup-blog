@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="partials/head :: head">
+    <meta charset="UTF-8">
+    <title>Welcome to our website!</title>
+</head>
+<body>
+<div th:replace="partials/nav :: nav"></div>
+<div class="container-main">
+    <div class="one" style="font-size: 40px; text-align: center; margin-top: 10px">
+        Welcome, Scott!
+    </div>
+    <div class="two">
+        <h1 class="main-h1">Welcome to your posts!</h1>
+    </div>
+    <div class="three">
+        <div class="item1"></div>
+        <div class="three-a" >
+            <div sec:authorize="isAuthenticated()">
+                This content is only shown to authenticated users.
+
+                User ID: <span th:text="${#authentication.principal.id}"/>
+                Username: <span th:text="${#authentication.principal.username}"/>
+                Email: <span th:text="${#authentication.principal.email}"/>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,9 +1,13 @@
 package com.codeup.spingblog.controller;
 
 import com.codeup.spingblog.model.Post;
+import com.codeup.spingblog.model.Tag;
 import com.codeup.spingblog.model.User;
 import com.codeup.spingblog.repositories.PostRepository;
+import com.codeup.spingblog.repositories.TagRepository;
 import com.codeup.spingblog.repositories.UserRepository;
+import com.codeup.spingblog.services.EmailService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,9 +23,15 @@ public class PostController {
 
    private UserRepository usersDao;
 
-    public PostController(PostRepository postsDao, UserRepository usersDao) {
+   private TagRepository tagsDao;
+
+    private  EmailService emailService;
+
+    public PostController(PostRepository postsDao, UserRepository usersDao, TagRepository tagsDao, EmailService emailService) {
         this.postsDao = postsDao;
         this.usersDao = usersDao;
+        this.tagsDao = tagsDao;
+        this.emailService =emailService;
     }
 
     @GetMapping("/posts")
@@ -32,17 +42,16 @@ public class PostController {
     }
 
         @GetMapping("/posts/create")
-        public String createPost(){
+        public String showCreateForm(Model model){
+        model.addAttribute("post", new Post());
             return "/posts/create";
         }
-
-
-    @PostMapping("posts/create")
-    public String savePost(String title, String body){
-    if (title != null && body != null) {
-        User user = usersDao.getById(1L);
-    postsDao.save(new Post(title, body, user));
-    }
+    @PostMapping("/posts/create")
+    public String create(@ModelAttribute Post post){
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        post.setUser(currentUser);
+         postsDao.save(post);
+        emailService.prepareAndSend(usersDao.getById(1L), "Post Created", "Your new post has been created.");
     return "redirect:/posts";
     }
 
@@ -50,13 +59,13 @@ public class PostController {
     public String postByIdPage(){
         return "/posts/show";
     }
+
     @PostMapping("/posts")
     public String postMethods(Long delete, Long edit, Long show, HttpSession session, Model model){
-
         if (show != null) {
             Post post = postsDao.getById(show);
             model.addAttribute("post", post);
-            return "/posts/show";
+            return "redirect:/posts/show";
         }
 
         if (edit != null) {
@@ -76,21 +85,14 @@ public class PostController {
         return "/posts/edit";
     }
 
-    @PostMapping("/posts/edit")
+    @PostMapping("/posts/edit")         
     public String editPost( String title, String body, HttpSession session){
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Long id = (Long) session.getAttribute("edit");
         if (title != null && body != null) {
             postsDao.editPost(title, body, id);
         }
         return "redirect:/posts";
     }
-//    @PostMapping("/posts")
-//    public String singleAd (Long singleAd, Model model) {
-//        if (singleAd != null) {
-//            Post post = postsDao.getById(singleAd);
-//            model.addAttribute("post", post);
-//        }
-//        return "/posts/show";
-//    }
 }
 
